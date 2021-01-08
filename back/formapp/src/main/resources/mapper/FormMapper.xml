@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.formapp.mapper.FormMapper">
+
+	<select id="formList" resultType="com.formapp.vo.FormVO">
+		SELECT * FROM form
+		ORDER BY formIdx
+	</select>
+
+</mapper>
