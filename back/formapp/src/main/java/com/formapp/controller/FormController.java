@@ -21,8 +21,7 @@ public class FormController {
 	
 	@GetMapping
 	public List<FormVO> formList(){
-		System.out.println(formMapper.formList());
-		System.out.println("설문 리스트 출력 성공");
+		System.out.println("=== 설문 목록 ===");
 		return formMapper.formList();
 	}
 	
