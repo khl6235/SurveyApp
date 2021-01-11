@@ -24,7 +24,7 @@ class FormListComponent extends Component{
     }
 
     loadFormList = () => {
-        ApiService.fetchForms()
+        ApiService.formList()
         .then(res => {
             this.setState({
                 forms: res.data
@@ -33,6 +33,10 @@ class FormListComponent extends Component{
         .catch(err => {
             console.log("loadFormList error!", err);
         })
+    }
+
+    readForm = (formIdx) => {
+        this.props.history.push(`/forms/${formIdx}`);
     }
 
     render(){
@@ -50,7 +54,7 @@ class FormListComponent extends Component{
                     </TableHead>
                     <TableBody>
                         {this.state.forms.map(form=>
-                            <TableRow key={form.formIdx}>
+                            <TableRow onClick={() => this.readForm(form.formIdx)} key={form.formIdx}>
                                 <TableCell component="th" scope="form">{form.formIdx}</TableCell>
                                 <TableCell>{form.userIdx}</TableCell>
                                 <TableCell>{form.title}</TableCell>

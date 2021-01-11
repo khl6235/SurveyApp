@@ -40,5 +40,10 @@ public class FormVO {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	@Override
+	public String toString() {
+		return "FormVO [formIdx = "+formIdx+", userIdx = "+userIdx+", title = "+title+", createdAt = "+createdAt+"]";
+	}
 
 }
