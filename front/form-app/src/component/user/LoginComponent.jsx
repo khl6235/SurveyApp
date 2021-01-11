@@ -36,7 +36,7 @@ class LoginComponent extends Component{
             ApiService.login(user)
             .then(res => {
                 console.log(res.data);
-                if(res.data){
+                if(res && res.data){
                     this.setState({
                         userIdx: res.data.userIdx,
                         id: res.data.id,

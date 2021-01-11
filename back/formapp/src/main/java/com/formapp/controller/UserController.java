@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formapp.mapper.UserMapper;
 import com.formapp.vo.UserVO;
 
-@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
