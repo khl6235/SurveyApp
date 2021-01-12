@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import ApiService from "../../ApiService";
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import { Button } from '@material-ui/core';
+
+import ContentComponent from "../form/ContentComponent";
 
 class FormResultComponent extends Component{
 
@@ -15,7 +13,8 @@ class FormResultComponent extends Component{
 
         this.state = {
             formIdx: this.props.match.params.formIdx,
-            form: {}
+            formInfo: [],
+            contentInfo:[],
         }
     }
 
@@ -26,18 +25,35 @@ class FormResultComponent extends Component{
     loadFormDetail = () =>{
         ApiService.formInfo(this.state.formIdx)
         .then(res => {
-            console.log(res);
+            this.setState({
+                formInfo: res.data.formInfo,
+                contentInfo: res.data.contentInfo
+            });
         })
         .catch(err => {
             console.log('loadFormDetail error!', err.response);
         })
+    }
+    goToList = () =>{
+        this.props.history.push('/forms');
     }
 
     render(){
         return(
             <div>
                 <Typography variant="h4" style={style}>Form Result</Typography>
-                <Typography variant="h5">{this.state.formIdx}번 설문</Typography>
+                
+                <form style={formResultContainer}>
+                    <Button style={goToListStyle} color="primary" onClick={this.goToList}>목록으로</Button>
+                    <Typography style={{fontWeight:600}} variant="h5">{this.state.formInfo.title}</Typography>
+                    <Typography style={{marginTop: '10px'}} color="textSecondary" variant="body1">{this.state.formInfo.userId} | {this.state.formInfo.createdAt}</Typography>
+                    <div style={{margin: '10px 15px'}}>
+                        {this.state.contentInfo.map(content => {
+                            return(<ContentComponent key={content.contentDetail.contentIdx} contentInfo = {content}></ContentComponent>);
+                        })}
+                    </div>
+                </form>
+                
                 
             </div>
         )
@@ -48,7 +64,15 @@ class FormResultComponent extends Component{
 const style={
     display: 'flex',
     justifyContent: 'center',
-    margin: '40px auto'
+    margin: '40px 80px'
+}
+
+const goToListStyle={
+    float: 'right'
+}
+
+const formResultContainer={
+    margin: '40px 240px'
 }
 
 export default FormResultComponent;

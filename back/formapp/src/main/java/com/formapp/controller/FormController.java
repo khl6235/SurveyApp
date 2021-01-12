@@ -38,6 +38,7 @@ public class FormController {
 	@GetMapping
 	public List<FormVO> formList(){
 		System.out.println("=== 설문 목록 ===");
+		System.out.println(formMapper.formList());
 		return formMapper.formList();
 	}
 	
@@ -47,7 +48,6 @@ public class FormController {
 		
 		//formInfo
 		resultForm.formInfo = formMapper.formDetail(formIdx);
-		System.out.println(resultForm.formInfo);
 		
 		//contentInfo
 		List<ContentVO> contentList = formMapper.contentList(formIdx);

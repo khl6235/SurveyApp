@@ -71,7 +71,6 @@ class LoginComponent extends Component{
 
                     <Button variant="contained" color="primary" onClick={this.logIn}>login</Button>
                 </form>
-                {/* <FormListComponent userIdx={this.state.userIdx} id={this.state.id}/> */}
             </div>
         );
     }

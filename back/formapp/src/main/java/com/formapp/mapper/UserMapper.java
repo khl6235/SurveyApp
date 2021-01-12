@@ -8,5 +8,4 @@ import com.formapp.vo.UserVO;
 public interface UserMapper {
 	
 	UserVO login(UserVO vo);
-
 }

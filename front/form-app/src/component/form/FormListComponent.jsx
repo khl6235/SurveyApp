@@ -47,7 +47,7 @@ class FormListComponent extends Component{
                     <TableHead>
                         <TableRow>
                             <TableCell>FormIdx</TableCell>
-                            <TableCell>UserIdx</TableCell>
+                            <TableCell>UserId</TableCell>
                             <TableCell>title</TableCell>
                             <TableCell>createdAt</TableCell>
                         </TableRow>
@@ -56,7 +56,7 @@ class FormListComponent extends Component{
                         {this.state.forms.map(form=>
                             <TableRow onClick={() => this.readForm(form.formIdx)} key={form.formIdx}>
                                 <TableCell component="th" scope="form">{form.formIdx}</TableCell>
-                                <TableCell>{form.userIdx}</TableCell>
+                                <TableCell>{form.userId}</TableCell>
                                 <TableCell>{form.title}</TableCell>
                                 <TableCell>{form.createdAt}</TableCell>
                             </TableRow>
