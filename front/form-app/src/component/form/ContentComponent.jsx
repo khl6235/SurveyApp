@@ -17,6 +17,7 @@ class ContentComponent extends Component {
 
   componentDidMount() {
     this.loadContent();
+    console.log(this.props);
   }
 
   loadContent = () => {
