@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.formapp.mapper.FormMapper;
 import com.formapp.vo.FormVO;
 
-@CrossOrigin(origins="*", maxAge=3600)
 @RestController
 @RequestMapping("/forms")
 public class FormController {
