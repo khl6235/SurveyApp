@@ -6,6 +6,10 @@ class ApiService{
     fetchForms(){
         return axios.get(`${BASE_URL}/forms`);
     }
+
+    login(user){
+        return axios.post(`${BASE_URL}/user/login`, user);
+    }
 }
 
 export default new ApiService();
