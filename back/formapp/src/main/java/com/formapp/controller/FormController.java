@@ -10,27 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formapp.mapper.FormMapper;
+import com.formapp.model.ContentInfo;
+import com.formapp.model.ResultForm;
 import com.formapp.vo.ContentVO;
 import com.formapp.vo.EntryVO;
 import com.formapp.vo.FormVO;
-import com.formapp.vo.ObjResultVO;
-import com.formapp.vo.SubjResultVO;
 
 @RestController
 @RequestMapping("/forms")
 public class FormController {
-	
-	public class ResultForm{
-		public FormVO formInfo;
-		public List<ContentInfo> contentInfo;
-	}
-	
-	public class ContentInfo{
-		public ContentVO contentDetail;
-		public List<EntryVO> entryDetail;
-		public List<ObjResultVO> objResultDetail;
-		public List<SubjResultVO> subjResultDetail;
-	}
 	
 	@Autowired
 	FormMapper formMapper;
