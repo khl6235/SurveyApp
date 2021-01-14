@@ -25,8 +25,6 @@ public class FormController {
 	
 	@GetMapping
 	public List<FormVO> formList(){
-		System.out.println("=== 설문 목록 ===");
-		System.out.println(formMapper.formList());
 		return formMapper.formList();
 	}
 	
