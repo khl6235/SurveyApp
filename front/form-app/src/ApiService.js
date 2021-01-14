@@ -14,6 +14,10 @@ class ApiService {
   formInfo(formIdx) {
     return axios.get(`${BASE_URL}/forms/${formIdx}`);
   }
+
+  contentReply(contentIdx, result) {
+    return axios.post(`${BASE_URL}/contents/${contentIdx}`, result);
+  }
 }
 
 export default new ApiService();

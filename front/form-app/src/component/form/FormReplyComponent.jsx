@@ -42,9 +42,9 @@ class FormReplyComponent extends Component {
   replyResult = (reply) => {
     let replyInfo = this.state.replyInfo;
     let targetIdx = replyInfo.findIndex(
-      (result) => result.contentIdx == reply.contentIdx
+      (result) => result.contentIdx === reply.contentIdx
     );
-    if (targetIdx != -1) {
+    if (targetIdx !== -1) {
       replyInfo.splice(targetIdx, 1, reply);
     } else {
       replyInfo.push(reply);
@@ -52,8 +52,16 @@ class FormReplyComponent extends Component {
   };
 
   submit = () => {
-    console.log("summit!");
-    //axios.post
+    this.state.replyInfo.forEach((content) => {
+      content.userIdx = 3;
+      ApiService.contentReply(content.contentIdx, content)
+        .then((res) => {
+          this.props.history.push("/forms");
+        })
+        .catch((err) => {
+          console.log("contentReply error!", err.response);
+        });
+    });
   };
 
   render() {
