@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import FormListComponent from "../form/FormListComponent";
+import LoginComponent from "../user/LoginComponent";
 
 const AppRouter = () => {
     return(
@@ -8,7 +9,8 @@ const AppRouter = () => {
             <BrowserRouter>
             <div style={style}>
                 <Switch>
-                    <Route exact path="/" component={FormListComponent}/>
+                    <Route exact path="/" component={LoginComponent}/>
+                    <Route path="/forms" component={FormListComponent}/>
                 </Switch>
             </div>
             </BrowserRouter>
