@@ -1,76 +1,73 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import ApiService from "../../ApiService";
 
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 
-class FormListComponent extends Component {
-  constructor(props) {
-    super(props);
+class FormListComponent extends Component{
 
-    this.state = {
-      forms: [],
-      message: null,
-    };
-  }
+    constructor(props){
+        super(props);
+        
+        this.state = {
+            forms: [],
+            message: null
+        }
+    }
 
-  componentDidMount() {
-    this.loadFormList();
-  }
+    componentDidMount(){
+        this.loadFormList();
+    }
 
-  loadFormList = () => {
-    ApiService.fetchForms()
-      .then((res) => {
-        this.setState({
-          forms: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log("loadFormList error!", err);
-      });
-  };
+    loadFormList = () => {
+        ApiService.fetchForms()
+        .then(res => {
+            this.setState({
+                forms: res.data
+            })
+        })
+        .catch(err => {
+            console.log("loadFormList error!", err);
+        })
+    }
 
-  render() {
-    return (
-      <div>
-        <Typography variant="h4" style={style}>
-          Form List
-        </Typography>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>FormIdx</TableCell>
-              <TableCell>UserIdx</TableCell>
-              <TableCell>title</TableCell>
-              <TableCell>createdAt</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.forms.map((form) => (
-              <TableRow key={form.formIdx}>
-                <TableCell component="th" scope="form">
-                  {form.formIdx}
-                </TableCell>
-                <TableCell>{form.userIdx}</TableCell>
-                <TableCell>{form.title}</TableCell>
-                <TableCell>{form.createdAt}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    );
-  }
+    render(){
+        return(
+            <div>
+                <Typography variant="h4" style={style}>Form List</Typography>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>FormIdx</TableCell>
+                            <TableCell>UserIdx</TableCell>
+                            <TableCell>title</TableCell>
+                            <TableCell>createdAt</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.forms.map(form=>
+                            <TableRow key={form.formIdx}>
+                                <TableCell component="th" scope="form">{form.formIdx}</TableCell>
+                                <TableCell>{form.userIdx}</TableCell>
+                                <TableCell>{form.title}</TableCell>
+                                <TableCell>{form.createdAt}</TableCell>
+                            </TableRow>
+                            )}
+                    </TableBody>
+                </Table>
+            </div>
+        );
+    }
 }
 
-const style = {
-  display: "flex",
-  justifyContent: "center",
-  margin: "40px auto",
-};
+const style={
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '40px auto'
+}
 
 export default FormListComponent;
