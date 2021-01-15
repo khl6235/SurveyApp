@@ -4,6 +4,7 @@ import LoginComponent from "../user/LoginComponent";
 import FormListComponent from "../form/FormListComponent";
 import FormResultComponent from "../form/FormResultComponent";
 import FormReplyComponent from "../form/FormReplyComponent";
+import FormCreateComponent from "../form/FormCreateComponent";
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
               path="/forms/:formIdx/reply"
               component={FormReplyComponent}
             />
+            <Route path="/forms/create" component={FormCreateComponent} />
             <Route path="/forms" component={FormListComponent} />
           </Switch>
         </div>

@@ -43,12 +43,22 @@ class FormListComponent extends Component {
     this.props.history.push(`/forms/${formIdx}/reply`);
   };
 
+  createForm = () => {
+    this.props.history.push(`/forms/create`);
+  };
+
   render() {
     return (
       <div>
         <Typography variant="h4" style={style}>
           Form List
         </Typography>
+        <Button
+          style={{ float: "right", marginRight: "80px" }}
+          onClick={this.createForm}
+        >
+          설문 생성
+        </Button>
         <Table>
           <TableHead>
             <TableRow>
