@@ -17,17 +17,12 @@ public class UserController {
 	UserMapper userMapper;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public UserVO login(@RequestBody UserVO user) {
-		System.out.println("=== 로그인 ===");
-		
+	public UserVO login(@RequestBody UserVO user) {		
 		UserVO matchUser = userMapper.login(user);
-		
 		if(matchUser == null) {
-			System.out.println("존재하지 않는 사용자입니다.");
 			return null;
 		}
 		else {
-			System.out.println(matchUser);
 			return matchUser;
 		}
 	}

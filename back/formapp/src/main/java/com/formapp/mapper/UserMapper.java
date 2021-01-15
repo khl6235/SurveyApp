@@ -6,6 +6,5 @@ import com.formapp.vo.UserVO;
 
 @Mapper
 public interface UserMapper {
-	
 	UserVO login(UserVO vo);
 }
