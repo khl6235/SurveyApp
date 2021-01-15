@@ -52,27 +52,29 @@ public class FormController {
 		//contentInfo
 		List<ContentVO> contentList = formMapper.contentList(formIdx);
 		List<ContentInfo> contentInfoList = new ArrayList<>();
-		for(int con = 0; con < contentList.size(); con++) {
-			ContentInfo contentInfo = new ContentInfo();
-			
-			//contentDetail
-			contentInfo.contentDetail = contentList.get(con);
-			
-			int contentIdx = contentList.get(con).getContentIdx();
-			
-			//entryDetail
-			List<EntryVO> entryDetail = formMapper.objEntryList(contentIdx);
-			if(entryDetail.size() != 0) { //obj
-				contentInfo.entryDetail = entryDetail;
-				contentInfo.objResultDetail = formMapper.objResult(contentIdx);
-				contentInfo.subjResultDetail = null;
+		if(!contentList.isEmpty()) {
+			for(int con = 0; con < contentList.size(); con++) {
+				ContentInfo contentInfo = new ContentInfo();
+				
+				//contentDetail
+				contentInfo.contentDetail = contentList.get(con);
+				
+				int contentIdx = contentList.get(con).getContentIdx();
+				
+				//entryDetail
+				List<EntryVO> entryDetail = formMapper.objEntryList(contentIdx);
+				if(entryDetail.size() != 0) { //obj
+					contentInfo.entryDetail = entryDetail;
+					contentInfo.objResultDetail = formMapper.objResult(contentIdx);
+					contentInfo.subjResultDetail = null;
+				}
+				else { //subj
+					contentInfo.entryDetail = null;
+					contentInfo.objResultDetail = null;
+					contentInfo.subjResultDetail = formMapper.subjResult(contentIdx);
+				}
+				contentInfoList.add(contentInfo);
 			}
-			else { //subj
-				contentInfo.entryDetail = null;
-				contentInfo.objResultDetail = null;
-				contentInfo.subjResultDetail = formMapper.subjResult(contentIdx);
-			}
-			contentInfoList.add(contentInfo);
 		}
 		resultForm.contentInfo = contentInfoList;
 		
