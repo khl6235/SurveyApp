@@ -53,7 +53,7 @@ class FormReplyComponent extends Component {
 
   submit = () => {
     this.state.replyInfo.forEach((content) => {
-      content.userIdx = 3;
+      content.userIdx = window.sessionStorage.getItem("userIdx");
       ApiService.contentReply(content.contentIdx, content)
         .then((res) => {
           this.props.history.push("/forms");
