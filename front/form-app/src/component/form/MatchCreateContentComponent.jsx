@@ -2,23 +2,22 @@ import React, { Component } from "react";
 
 import { TextField } from "@material-ui/core";
 
+import CreateEntryComponent from "../form/CreateEntryComponent";
+
 class MatchCreateContentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       question: "",
       description: "",
-      objEntry: this.props.contentTypeInfo.objEntry,
+      objEntry: [],
     };
   }
 
   createQuestion = (e) => {
-    this.setState(
-      {
-        question: e.target.value,
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      question: e.target.value,
+    });
   };
 
   createDescription = (e) => {
@@ -27,17 +26,18 @@ class MatchCreateContentComponent extends Component {
     });
   };
 
-  createEntry = (e) => {
-    this.setState(
-      {
-        objEntry: this.state.objEntry.push(e.target.value),
-      },
-      () => console.log(this.state)
-    );
+  createEntry = (newEntry) => {
+    const objEntry = this.state.objEntry;
+    const newIdx = this.state.objEntry.length;
+    objEntry.push({
+      idx: newIdx,
+      entry: newEntry,
+    });
+    console.log(objEntry);
   };
 
   render() {
-    const contentType = this.props.contentTypeInfo.contentType;
+    const contentType = this.props.contentType;
     if (contentType !== null) {
       if (contentType === "obj") {
         return (
@@ -59,14 +59,9 @@ class MatchCreateContentComponent extends Component {
               onBlur={this.createDescription}
             ></TextField>
 
-            {this.state.objEntry.map((entry) => {
-              <TextField
-                required
-                fullWidth
-                variant="standard"
-                defaultValue={entry}
-              ></TextField>;
-            })}
+            <CreateEntryComponent
+              createEntry={this.createEntry}
+            ></CreateEntryComponent>
           </div>
         );
       } else if (contentType === "subj") {

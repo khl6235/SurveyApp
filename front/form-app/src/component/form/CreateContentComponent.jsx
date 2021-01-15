@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Button, TextField } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
 
 import MatchCreateContentComponent from "../form/MatchCreateContentComponent";
@@ -10,15 +10,12 @@ class CreateContentComponent extends Component {
     super(props);
     this.state = {
       contentType: null,
-      objEntry: [],
     };
   }
 
   clickObj = () => {
-    const defaultObjEntry = ["항목 1", "항목 2"];
     this.setState({
       contentType: "obj",
-      objEntry: defaultObjEntry,
     });
   };
 
@@ -34,7 +31,7 @@ class CreateContentComponent extends Component {
       <div>
         <div>
           <MatchCreateContentComponent
-            contentTypeInfo={this.state}
+            contentType={this.state.contentType}
           ></MatchCreateContentComponent>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
