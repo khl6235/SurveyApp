@@ -31,7 +31,7 @@ class MatchContentComponent extends Component {
   objChange = (e) => {
     this.setState(
       {
-        objReply: e.target.value,
+        objReply: parseInt(e.target.value),
       },
       () => this.childFunc()
     );
