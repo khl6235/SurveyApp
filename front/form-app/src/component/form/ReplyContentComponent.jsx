@@ -19,16 +19,17 @@ class ReplyContentComponent extends Component {
   };
 
   render() {
+    const { question, description } = this.props.contentInfo.contentDetail;
     return (
       <div style={contentStyle}>
         <Typography style={{ fontWeight: 600 }} variant="h6">
-          {this.props.contentInfo.contentDetail.question}
+          {question}
         </Typography>
         <Typography
           style={{ marginTop: "7px", marginBottom: "15px" }}
           variant="body2"
         >
-          {this.props.contentInfo.contentDetail.description}
+          {description}
         </Typography>
         <MatchContentComponent
           contentInfo={this.props.contentInfo}

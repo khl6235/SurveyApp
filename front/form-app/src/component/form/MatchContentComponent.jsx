@@ -15,7 +15,7 @@ class MatchContentComponent extends Component {
   }
 
   childFunc = () => {
-    let replyInfo = this.state;
+    const replyInfo = this.state;
     this.props.func(replyInfo);
   };
 
@@ -37,11 +37,7 @@ class MatchContentComponent extends Component {
     );
   };
 
-  radioChecked = (ent) => {
-    if (this.state.objReply == ent.entryIdx) {
-      return true;
-    } else return false;
-  };
+  radioChecked = (ent) => this.state.objReply == ent.entryIdx;
 
   render() {
     if (this.props.contentInfo.objResultDetail === null) {

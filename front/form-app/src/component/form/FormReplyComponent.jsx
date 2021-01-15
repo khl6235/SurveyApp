@@ -40,8 +40,8 @@ class FormReplyComponent extends Component {
   };
 
   replyResult = (reply) => {
-    let replyInfo = this.state.replyInfo;
-    let targetIdx = replyInfo.findIndex(
+    const replyInfo = this.state.replyInfo;
+    const targetIdx = replyInfo.findIndex(
       (result) => result.contentIdx === reply.contentIdx
     );
     if (targetIdx !== -1) {
