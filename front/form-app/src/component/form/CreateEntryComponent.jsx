@@ -35,8 +35,13 @@ class CreateEntryComponent extends Component {
   };
 
   addEntry = () => {
+    const {entries} = this.state;
+    let nextId = 1;
+    if(entries.length !== 0){
+      nextId = entries[entries.length-1].id + 1;
+    }
     const addEntry = {
-      id: this.state.entries.length + 1,
+      id: nextId,
       entry: "",
     };
     const newEntries = [...this.state.entries, addEntry];
