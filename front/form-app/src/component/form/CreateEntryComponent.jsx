@@ -17,6 +17,11 @@ class CreateEntryComponent extends Component {
     };
   }
 
+  childFunc = () => {
+    const entries = this.state;
+    this.props.func(entries);
+  };
+
   updateEntry = (id) => (e) => {
     const newEntry = e.target.value;
     const tempEntries = this.state.entries.map((ent) => {
@@ -30,15 +35,15 @@ class CreateEntryComponent extends Component {
       {
         entries: tempEntries,
       },
-      () => console.log(this.state)
+      () => this.childFunc()
     );
   };
 
   addEntry = () => {
-    const {entries} = this.state;
+    const { entries } = this.state;
     let nextId = 1;
-    if(entries.length !== 0){
-      nextId = entries[entries.length-1].id + 1;
+    if (entries.length !== 0) {
+      nextId = entries[entries.length - 1].id + 1;
     }
     const addEntry = {
       id: nextId,
@@ -49,7 +54,7 @@ class CreateEntryComponent extends Component {
       {
         entries: newEntries,
       },
-      () => console.log(this.state)
+      () => this.childFunc()
     );
   };
 
@@ -68,7 +73,7 @@ class CreateEntryComponent extends Component {
       {
         entries: tempEntries,
       },
-      () => console.log(this.state)
+      () => this.childFunc()
     );
   };
 
@@ -102,23 +107,13 @@ class CreateEntryComponent extends Component {
           </Table>
         )}
         <Button
-          style={{ margin: "10px 0" }}
+          style={{ marginLeft: "10px", marginBottom: "10px" }}
           color="primary"
           size="small"
           startIcon={<Add />}
           onClick={this.addEntry}
         >
           항목 추가
-        </Button>
-
-        <Button
-          style={{ margin: "10px 0" }}
-          color="primary"
-          size="small"
-          startIcon={<Close />}
-          onClick={this.deleteAllEntry}
-        >
-          삭제
         </Button>
       </div>
     );

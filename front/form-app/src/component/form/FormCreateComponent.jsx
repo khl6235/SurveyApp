@@ -37,22 +37,17 @@ class FormCreateComponent extends Component {
             </div>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="contained" color="primary">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "50px 0",
+            }}
+          >
+            <Button variant="contained" color="primary" size="large">
               Create
             </Button>
           </div>
-
-          {/* <div style={{ margin: "10px 15px" }}>
-                  {this.state.contentInfo.map((content) => {
-                    return (
-                      <ContentComponent
-                        key={content.contentDetail.contentIdx}
-                        contentInfo={content}
-                      ></ContentComponent>
-                    );
-                  })}
-                </div> */}
         </form>
       </div>
     );

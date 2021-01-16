@@ -1,47 +1,111 @@
 import React, { Component } from "react";
 
-import { Button } from "@material-ui/core";
+import { Button, TableCell } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import { Table } from "@material-ui/core";
 
 import MatchCreateContentComponent from "../form/MatchCreateContentComponent";
+import Close from "@material-ui/icons/Close";
 
 class CreateContentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentType: null,
+      contents: [],
     };
   }
 
-  clickObj = () => {
-    this.setState({
+  addObjContent = () => {
+    const { contents } = this.state;
+    let nextId = 1;
+    if (contents.length !== 0) {
+      nextId = contents[contents.length - 1].id + 1;
+    }
+    const addObj = {
+      id: nextId,
       contentType: "obj",
+      contentInfo: null,
+    };
+    const newContents = [...this.state.contents, addObj];
+    this.setState({
+      contents: newContents,
     });
   };
 
-  clickSubj = () => {
-    this.setState({
+  addSubjContent = () => {
+    const { contents } = this.state;
+    let nextId = 1;
+    if (contents.length !== 0) {
+      nextId = contents[contents.length - 1].id + 1;
+    }
+    const addSubj = {
+      id: nextId,
       contentType: "subj",
-      objEntry: null,
+      contentInfo: null,
+    };
+    const newContents = [...this.state.contents, addSubj];
+    this.setState({
+      contents: newContents,
     });
+  };
+
+  createContent = (id) => (contentInfo) => {
+    const tempContents = this.state.contents.map((cont) => {
+      if (cont.id === id) {
+        cont.contentInfo = contentInfo;
+      }
+      return cont;
+    });
+
+    this.setState(
+      {
+        contents: tempContents,
+      },
+      () => console.log(this.state)
+    );
+  };
+
+  deleteContent = (id) => () => {
+    const tempContents = this.state.contents.filter((cont) => {
+      return cont.id !== id;
+    });
+
+    this.setState(
+      {
+        contents: tempContents,
+      },
+      () => console.log(this.state)
+    );
   };
 
   render() {
     return (
-      <div>
-        <div>
+      <div style={formStyle}>
+        {this.state.contents.map((cont) => (
           <MatchCreateContentComponent
-            contentType={this.state.contentType}
+            key={cont.id}
+            func={this.createContent(cont.id)}
+            delete={this.deleteContent(cont.id)}
+            contentType={cont.contentType}
           ></MatchCreateContentComponent>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        ))}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "20px 0",
+          }}
+        >
           <Button
             style={{ margin: "10px auto" }}
             variant="outlined"
             color="primary"
             size="large"
             startIcon={<Add />}
-            onClick={this.clickObj}
+            onClick={this.addObjContent}
           >
             객관식
           </Button>
@@ -51,7 +115,7 @@ class CreateContentComponent extends Component {
             color="primary"
             size="large"
             startIcon={<Add />}
-            onClick={this.clickSubj}
+            onClick={this.addSubjContent}
           >
             주관식
           </Button>
@@ -60,5 +124,9 @@ class CreateContentComponent extends Component {
     );
   }
 }
+
+const formStyle = {
+  marginTop: "50px",
+};
 
 export default CreateContentComponent;
