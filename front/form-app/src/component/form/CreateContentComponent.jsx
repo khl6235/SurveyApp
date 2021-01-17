@@ -17,6 +17,10 @@ class CreateContentComponent extends Component {
     };
   }
 
+  childFunc = () => {
+    this.props.func(this.state.contents);
+  };
+
   addObjContent = () => {
     const { contents } = this.state;
     let nextId = 1;
@@ -29,9 +33,12 @@ class CreateContentComponent extends Component {
       contentInfo: null,
     };
     const newContents = [...this.state.contents, addObj];
-    this.setState({
-      contents: newContents,
-    });
+    this.setState(
+      {
+        contents: newContents,
+      },
+      () => this.childFunc()
+    );
   };
 
   addSubjContent = () => {
@@ -46,9 +53,12 @@ class CreateContentComponent extends Component {
       contentInfo: null,
     };
     const newContents = [...this.state.contents, addSubj];
-    this.setState({
-      contents: newContents,
-    });
+    this.setState(
+      {
+        contents: newContents,
+      },
+      () => this.childFunc()
+    );
   };
 
   createContent = (id) => (contentInfo) => {
@@ -63,7 +73,7 @@ class CreateContentComponent extends Component {
       {
         contents: tempContents,
       },
-      () => console.log(this.state)
+      () => this.childFunc()
     );
   };
 
@@ -76,7 +86,7 @@ class CreateContentComponent extends Component {
       {
         contents: tempContents,
       },
-      () => console.log(this.state)
+      () => this.childFunc()
     );
   };
 

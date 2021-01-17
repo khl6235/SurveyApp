@@ -4,14 +4,81 @@ import Typography from "@material-ui/core/Typography";
 import { Button, TextField } from "@material-ui/core";
 
 import CreateContentComponent from "../form/CreateContentComponent";
+import ApiService from "../../ApiService";
 
 class FormCreateComponent extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      contents: [],
+    };
   }
 
   goToList = () => {
     this.props.history.push("/forms");
+  };
+
+  createForm = (contents) => {
+    this.setState({
+      contents: contents,
+    });
+  };
+
+  create = () => {
+    let alertType = 0;
+    if (this.state.contents.length === 0) alertType = 1;
+    else {
+      this.state.contents.forEach((cont) => {
+        let flag = false;
+
+        if (cont.contentInfo !== null) {
+          const contentInfo = cont.contentInfo;
+          if (contentInfo.question.length !== 0) {
+            const objEntry = contentInfo.objEntry;
+
+            if (cont.contentType === "obj") {
+              if (objEntry.length !== 0) {
+                objEntry.entries.some((ent) => {
+                  console.log(ent);
+                  if (ent.entry.length === 0) {
+                    flag = false;
+                    alertType = 3;
+                  } else {
+                    flag = true;
+                  }
+                });
+              } else {
+                alertType = 4;
+              }
+            } else if (cont.contentType === "subj") {
+              flag = true;
+            }
+          } else {
+            alertType = 2;
+          }
+        } else {
+          alertType = 1;
+        }
+      });
+    }
+    switch (alertType) {
+      case 1:
+        alert("설문 내용을 작성해주세요.");
+        break;
+      case 2:
+        alert("모든 문항의 질문을 작성해주세요.");
+        break;
+      case 3:
+        alert("객관식 문항의 선택지를 작성해주세요.");
+        break;
+      case 4:
+        alert("객관식 문항은 선택지가 필요합니다.");
+        break;
+      default:
+        break;
+    }
+
   };
 
   render() {
@@ -33,7 +100,9 @@ class FormCreateComponent extends Component {
               label="설문 제목을 입력하세요"
             ></TextField>
             <div style={{ margin: "10px 15px" }}>
-              <CreateContentComponent></CreateContentComponent>
+              <CreateContentComponent
+                func={this.createForm}
+              ></CreateContentComponent>
             </div>
           </div>
 
@@ -44,7 +113,12 @@ class FormCreateComponent extends Component {
               margin: "50px 0",
             }}
           >
-            <Button variant="contained" color="primary" size="large">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={this.create}
+            >
               Create
             </Button>
           </div>
