@@ -18,6 +18,10 @@ class ApiService {
   contentReply(contentIdx, result) {
     return axios.post(`${BASE_URL}/contents/${contentIdx}`, result);
   }
+
+  contentForm(result){
+    return axios.post(`${BASE_URL}/forms`, result);
+  }
 }
 
 export default new ApiService();

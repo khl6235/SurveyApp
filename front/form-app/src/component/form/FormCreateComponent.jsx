@@ -11,6 +11,8 @@ class FormCreateComponent extends Component {
     super(props);
 
     this.state = {
+      title: "",
+      userId: "khl6235", //window.sessionStorage.getItem("id");
       contents: [],
     };
   }
@@ -18,6 +20,12 @@ class FormCreateComponent extends Component {
   goToList = () => {
     this.props.history.push("/forms");
   };
+
+  setTitle = (e) => {
+    this.setState({
+      title: e.target.value
+    });
+  }
 
   createForm = (contents) => {
     this.setState({
@@ -35,12 +43,12 @@ class FormCreateComponent extends Component {
         if (cont.contentInfo !== null) {
           const contentInfo = cont.contentInfo;
           if (contentInfo.question.length !== 0) {
-            const objEntry = contentInfo.objEntry;
+            
 
             if (cont.contentType === "obj") {
-              if (objEntry.length !== 0) {
+              const objEntry = contentInfo.objEntry;
+              if (objEntry.entries.length !== 0) {
                 objEntry.entries.some((ent) => {
-                  console.log(ent);
                   if (ent.entry.length === 0) {
                     flag = false;
                     alertType = 3;
@@ -62,7 +70,18 @@ class FormCreateComponent extends Component {
         }
       });
     }
+
     switch (alertType) {
+      case 0:
+        console.log(this.state);
+        ApiService.contentForm(this.state)
+        .then((res) => {
+          this.props.history.push("/forms");
+        })
+        .catch((err) => {
+          console.log("contentCreate error!", err.response);
+        });
+        break;
       case 1:
         alert("설문 내용을 작성해주세요.");
         break;
@@ -98,6 +117,7 @@ class FormCreateComponent extends Component {
               variant="standard"
               fullWidth
               label="설문 제목을 입력하세요"
+              onBlur={this.setTitle}
             ></TextField>
             <div style={{ margin: "10px 15px" }}>
               <CreateContentComponent
