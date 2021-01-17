@@ -32,5 +32,12 @@
 		FROM subj_result R JOIN content C
 		WHERE R.contentIdx = C.contentIdx AND C.contentIdx=#{contentIdx}
 	</select>
+	
+	<insert id="formCreate" parameterType="map">
+		INSERT INTO form(userId, title) VALUES(#{userId}, #{title})
+		<selectKey keyProperty="formIdx" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 
 </mapper>

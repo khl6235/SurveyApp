@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formapp.mapper.FormMapper;
 import com.formapp.model.ContentInfo;
+import com.formapp.model.CreateForm;
 import com.formapp.model.ResultForm;
 import com.formapp.vo.ContentVO;
 import com.formapp.vo.EntryVO;
@@ -64,6 +67,10 @@ public class FormController {
 		
 		return resultForm;
 	}
-
+	
+	@PostMapping
+	public void formCreate(@RequestBody CreateForm createForm) {
+		System.out.println(formMapper.formCreate(createForm.userId, createForm.title));
+	}
 }
 
