@@ -23,6 +23,7 @@ class MatchCreateContentComponent extends Component {
     this.setState(
       {
         question: e.target.value,
+        objEntry: null
       },
       () => this.childFunc()
     );
