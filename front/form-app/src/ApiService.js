@@ -10,6 +10,10 @@ class ApiService {
   login(user) {
     return axios.post(`${BASE_URL}/user/login`, user);
   }
+
+  signup(user) {
+    return axios.post(`${BASE_URL}/user/signup`, user);
+  }
 }
 
 export default new ApiService();

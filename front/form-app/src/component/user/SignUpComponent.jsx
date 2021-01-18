@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import ApiService from "../../ApiService";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { TextField } from "@material-ui/core";
+import ApiService from "../../ApiService";
 
-class LoginComponent extends Component {
+class SignUpComponent extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      userIdx: "",
       id: "",
       password: "",
+      passwordCheck: "",
     };
   }
 
@@ -22,48 +21,34 @@ class LoginComponent extends Component {
     });
   };
 
-  logIn = () => {
-    if (this.state.id.length > 0 && this.state.password.length > 0) {
-      ApiService.login(this.state)
-        .then((res) => {
-          if (res && res.data) {
-            this.setState({
-              userIdx: res.data.userIdx,
-              id: res.data.id,
-              password: res.data.password,
-            });
-            this.storeUser();
-          } else {
-            alert("존재하지 않는 사용자입니다.");
-          }
-        })
-        .catch((err) => {
-          console.log("login error!", err.response);
-        });
-    } else {
-      alert("정보를 입력해주세요.");
+  signUp = () => {
+    const { id, password, passwordCheck } = this.state;
+    if (id !== "" && password !== "" && passwordCheck !== "") {
+      if (password === passwordCheck) {
+        const user = { id, password };
+        ApiService.signup(user)
+          .then((res) => {
+            if (res.data === false) {
+              alert("이미 존재하는 아이디입니다.");
+            } else {
+              this.props.history.push("/");
+            }
+          })
+          .catch((err) => {
+            console.log("SignUp error!", err.response);
+          });
+      }
     }
-  };
-
-  storeUser = () => {
-    const { userIdx, id, password } = this.state;
-
-    window.sessionStorage.setItem("userIdx", userIdx);
-    window.sessionStorage.setItem("id", id);
-    this.props.history.push("/forms");
-  };
-
-  goToSignUp = () => {
-    this.props.history.push("/signup");
   };
 
   render() {
     return (
       <div style={style}>
         <Typography variant="h4" style={style2}>
-          LOGIN
+          SIGN UP
         </Typography>
-        <form style={loginContainer}>
+
+        <form style={signupContainer}>
           <TextField
             type="text"
             placeholder="ID"
@@ -84,18 +69,27 @@ class LoginComponent extends Component {
             onChange={this.onChange}
           />
 
+          <TextField
+            error={
+              this.state.password === this.state.passwordCheck ? false : true
+            }
+            type="password"
+            placeholder="PASSWORD CHECK"
+            fullWidth
+            margin="normal"
+            name="passwordCheck"
+            onChange={this.onChange}
+          />
+
           <Button
             style={{ margin: "20px 0" }}
             variant="contained"
             color="primary"
-            onClick={this.logIn}
+            onClick={this.signUp}
           >
-            login
+            sign up
           </Button>
         </form>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={this.goToSignUp}>회원가입</Button>
-        </div>
       </div>
     );
   }
@@ -112,11 +106,11 @@ const style2 = {
   justifyContent: "center",
 };
 
-const loginContainer = {
+const signupContainer = {
   marginTop: "50px",
   display: "flex",
   flexFlow: "row wrap",
   justifyContent: "center",
 };
 
-export default LoginComponent;
+export default SignUpComponent;
