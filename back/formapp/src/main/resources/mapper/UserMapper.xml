@@ -6,5 +6,5 @@
 		SELECT * FROM user
 		WHERE id=#{id} AND password=#{password}
 	</select>
-
+	
 </mapper>

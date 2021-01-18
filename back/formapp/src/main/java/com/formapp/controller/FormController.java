@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formapp.mapper.ContentMapper;
 import com.formapp.mapper.FormMapper;
+import com.formapp.model.ContentCreateInfo;
 import com.formapp.model.ContentInfo;
 import com.formapp.model.CreateForm;
+import com.formapp.model.ObjEntry;
 import com.formapp.model.ResultForm;
 import com.formapp.vo.ContentVO;
 import com.formapp.vo.EntryVO;
@@ -25,6 +28,9 @@ public class FormController {
 	
 	@Autowired
 	FormMapper formMapper;
+	
+	@Autowired
+	ContentMapper contentMapper;
 	
 	@GetMapping
 	public List<FormVO> formList(){
@@ -70,7 +76,48 @@ public class FormController {
 	
 	@PostMapping
 	public void formCreate(@RequestBody CreateForm createForm) {
-		System.out.println(formMapper.formCreate(createForm.userId, createForm.title));
+		FormVO formVO = new FormVO();
+		formVO.setUserId(createForm.userId);
+		formVO.setTitle(createForm.title);
+		
+		//insert form table & find formIdx
+		formMapper.formCreate(formVO);
+		int formIdx = formVO.getFormIdx();
+		
+		//find userIdx
+		int userIdx = formMapper.findUser(createForm.userId);
+		
+		//insert user_form table
+		formMapper.formUserCreate(userIdx, formIdx);
+		
+		for(int cont = 0; cont < createForm.contents.size(); cont++) {
+			String contentType = createForm.contents.get(cont).contentType;
+			if(contentType.equals("obj") || contentType.equals("subj")) {
+				ContentCreateInfo contentInfo = createForm.contents.get(cont).contentInfo;
+				ContentVO contentVO = new ContentVO();
+				contentVO.setFormIdx(formIdx);
+				contentVO.setQuestion(contentInfo.question);
+				contentVO.setDescription(contentInfo.description);
+				
+				//insert content table & find contentIdx
+				formMapper.contentCreate(contentVO);
+				int contentIdx = contentVO.getContentIdx();
+				
+				//if obj, iteration
+				if(contentType.equals("obj") && contentInfo.objEntry != null) {
+					 ObjEntry objEntry = contentInfo.objEntry;
+					 for(int ent = 0; ent < objEntry.entries.size(); ent++) {
+						 EntryVO entryVO = new EntryVO();
+						 entryVO.setContentIdx(contentIdx);
+						 entryVO.setEntry(objEntry.entries.get(ent).entry);
+						 
+						 //insert obj_entry table
+						 formMapper.entryCreate(entryVO);
+					 }
+				}
+			}
+			
+		}
 	}
 }
 

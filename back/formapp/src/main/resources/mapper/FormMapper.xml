@@ -33,11 +33,30 @@
 		WHERE R.contentIdx = C.contentIdx AND C.contentIdx=#{contentIdx}
 	</select>
 	
-	<insert id="formCreate" parameterType="map">
+	<select id="findUser" parameterType="String" resultType="Integer">
+		SELECT userIdx FROM user WHERE id=#{id}
+	</select>
+	
+	<insert id="formCreate" parameterType="com.formapp.vo.FormVO">
 		INSERT INTO form(userId, title) VALUES(#{userId}, #{title})
 		<selectKey keyProperty="formIdx" resultType="Integer" order="AFTER">
-			SELECT LAST_INSERT_ID()
+			SELECT LAST_INSERT_ID() as formIdx
 		</selectKey>
 	</insert>
+	
+	<insert id="formUserCreate" parameterType="int">
+		INSERT INTO user_form(userIdx, formIdx) values(#{userIdx}, #{formIdx})
+	</insert>
 
+	<insert id="contentCreate" parameterType="com.formapp.vo.ContentVO">
+		INSERT INTO content(formIdx, question, description) VALUES(#{formIdx}, #{question}, #{description})
+		<selectKey keyProperty="contentIdx" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as contentIdx
+		</selectKey>
+	</insert>
+	
+	<insert id="entryCreate" parameterType="com.formapp.vo.EntryVO">
+		INSERT INTO obj_entry(contentIdx, entry) VALUES(#{contentIdx}, #{entry})
+	</insert>
+	
 </mapper>
