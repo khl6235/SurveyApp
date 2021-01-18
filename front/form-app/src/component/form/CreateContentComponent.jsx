@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 
-import { Button, TableCell } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import { Table } from "@material-ui/core";
 
 import MatchCreateContentComponent from "../form/MatchCreateContentComponent";
-import Close from "@material-ui/icons/Close";
 
 class CreateContentComponent extends Component {
   constructor(props) {

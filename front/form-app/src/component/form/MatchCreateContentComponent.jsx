@@ -23,7 +23,7 @@ class MatchCreateContentComponent extends Component {
     this.setState(
       {
         question: e.target.value,
-        objEntry: null
+        objEntry: null,
       },
       () => this.childFunc()
     );
@@ -39,8 +39,12 @@ class MatchCreateContentComponent extends Component {
   };
 
   createEntry = (entries) => {
-    this.state.objEntry = entries;
-    this.childFunc();
+    this.setState(
+      {
+        objEntry: entries,
+      },
+      () => this.childFunc()
+    );
   };
 
   deleteContent = () => {
