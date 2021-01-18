@@ -59,4 +59,12 @@
 		INSERT INTO obj_entry(contentIdx, entry) VALUES(#{contentIdx}, #{entry})
 	</insert>
 	
+	<delete id="deleteUserForm" parameterType="int">
+		DELETE FROM user_form WHERE formIdx=#{formIdx}
+	</delete>
+	
+	<delete id="deleteForm" parameterType="int">
+		DELETE FROM form WHERE formIdx=#{formIdx}
+	</delete>
+	
 </mapper>

@@ -3,7 +3,6 @@ package com.formapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.formapp.vo.ContentVO;
 import com.formapp.vo.EntryVO;
@@ -24,4 +23,6 @@ public interface FormMapper {
 	void formUserCreate(int userIdx, int formIdx);
 	void contentCreate(ContentVO contentVO);
 	void entryCreate(EntryVO entryVO);
+	void deleteUserForm(int formIdx);
+	void deleteForm(int formIdx);
 }
