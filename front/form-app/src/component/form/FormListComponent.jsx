@@ -71,8 +71,8 @@ class FormListComponent extends Component {
           <TableHead>
             <TableRow>
               <TableCell style={boldText}>WRITER</TableCell>
-              <TableCell style={boldText}>TITLE</TableCell>
               <TableCell style={boldText}>CREATED AT</TableCell>
+              <TableCell style={boldText}>TITLE</TableCell>
               <TableCell style={boldText} align="center">
                 REPLY
               </TableCell>
@@ -87,8 +87,8 @@ class FormListComponent extends Component {
                 <TableCell component="th" scope="form">
                   {form.userId}
                 </TableCell>
-                <TableCell>{form.title}</TableCell>
                 <TableCell>{form.createdAt}</TableCell>
+                <TableCell>{form.title}</TableCell>
                 <TableCell
                   onClick={() => this.replyForm(form.formIdx)}
                   align="center"

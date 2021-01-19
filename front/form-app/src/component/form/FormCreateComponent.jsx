@@ -12,7 +12,7 @@ class FormCreateComponent extends Component {
 
     this.state = {
       title: "",
-      userId: "khl6235", //window.sessionStorage.getItem("id");
+      userId: window.sessionStorage.getItem("id"),
       contents: [],
     };
   }
@@ -23,9 +23,9 @@ class FormCreateComponent extends Component {
 
   setTitle = (e) => {
     this.setState({
-      title: e.target.value
+      title: e.target.value,
     });
-  }
+  };
 
   createForm = (contents) => {
     this.setState({
@@ -43,11 +43,9 @@ class FormCreateComponent extends Component {
         if (cont.contentInfo !== null) {
           const contentInfo = cont.contentInfo;
           if (contentInfo.question.length !== 0) {
-            
-
             if (cont.contentType === "obj") {
               const objEntry = contentInfo.objEntry;
-              if (objEntry.entries.length !== 0) {
+              if (objEntry !== null) {
                 objEntry.entries.some((ent) => {
                   if (ent.entry.length === 0) {
                     flag = false;
@@ -75,12 +73,12 @@ class FormCreateComponent extends Component {
       case 0:
         console.log(this.state);
         ApiService.contentForm(this.state)
-        .then((res) => {
-          this.props.history.push("/forms");
-        })
-        .catch((err) => {
-          console.log("contentCreate error!", err.response);
-        });
+          .then((res) => {
+            this.props.history.push("/forms");
+          })
+          .catch((err) => {
+            console.log("contentCreate error!", err.response);
+          });
         break;
       case 1:
         alert("설문 내용을 작성해주세요.");
@@ -97,7 +95,6 @@ class FormCreateComponent extends Component {
       default:
         break;
     }
-
   };
 
   render() {
