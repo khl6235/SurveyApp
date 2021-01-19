@@ -47,18 +47,29 @@ class FormListComponent extends Component {
     this.props.history.push(`/forms/create`);
   };
 
+  logout = () =>{
+    window.sessionStorage.clear();
+    this.props.history.push("/");
+  }
+
   render() {
     return (
       <div>
         <Typography variant="h4" style={style}>
           Form List
         </Typography>
-        <Button
-          style={{ float: "right", marginRight: "80px" }}
+        <div style={{float: "right", marginRight:"85px"}}>
+          <Button
+          style={{marginRight:"20px"}}
           onClick={this.createForm}
         >
           설문 생성
         </Button>
+        <Button
+        onClick={this.logout}
+        >로그아웃</Button>
+        </div>
+        
 
         <Table>
           <TableHead>
@@ -94,12 +105,6 @@ class FormListComponent extends Component {
     );
   }
 }
-const style = {
-  display: "flex",
-  justifyContent: "center",
-  margin: "40px auto",
-};
-
 const style = {
   display: "flex",
   justifyContent: "center",
