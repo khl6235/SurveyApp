@@ -4,8 +4,9 @@ import LoginComponent from "../user/LoginComponent";
 import FormListComponent from "../form/FormListComponent";
 import FormResultComponent from "../form/FormResultComponent";
 import FormReplyComponent from "../form/FormReplyComponent";
+import FormCreateComponent from "../form/FormCreateComponent";
 import SignUpComponent from "../user/SignUpComponent";
-        
+
 const AppRouter = () => {
   return (
     <div>
@@ -21,6 +22,7 @@ const AppRouter = () => {
               path="/forms/:formIdx/reply"
               component={FormReplyComponent}
             />
+            <Route path="/forms/create" component={FormCreateComponent} />
             <Route path="/forms" component={FormListComponent} />
             <Route path="/signup" component={SignUpComponent} />
           </Switch>
@@ -28,7 +30,6 @@ const AppRouter = () => {
       </BrowserRouter>
     </div>
   );
-
 };
 
 const style = {

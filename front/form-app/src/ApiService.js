@@ -18,6 +18,14 @@ class ApiService {
   contentReply(contentIdx, result) {
     return axios.post(`${BASE_URL}/contents/${contentIdx}`, result);
   }
+
+  contentForm(result) {
+    return axios.post(`${BASE_URL}/forms`, result);
+  }
+
+  deleteForm(formIdx) {
+    return axios.delete(`${BASE_URL}/forms/${formIdx}`);
+  }
     
   signup(user) {
     return axios.post(`${BASE_URL}/user/signup`, user);

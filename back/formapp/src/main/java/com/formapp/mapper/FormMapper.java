@@ -17,5 +17,12 @@ public interface FormMapper {
 	List<ContentVO> contentList(int formIdx);
 	List<EntryVO> objEntryList(int contentIdx);
 	List<ObjResultVO> objResult(int contentIdx);
-	List<SubjResultVO> subjResult(int contentIdx);	
+	List<SubjResultVO> subjResult(int contentIdx);
+	void formCreate(FormVO formVO);
+	int findUser(String id);
+	void formUserCreate(int userIdx, int formIdx);
+	void contentCreate(ContentVO contentVO);
+	void entryCreate(EntryVO entryVO);
+	void deleteUserForm(int formIdx);
+	void deleteForm(int formIdx);
 }

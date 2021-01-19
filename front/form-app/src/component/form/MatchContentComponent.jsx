@@ -37,7 +37,7 @@ class MatchContentComponent extends Component {
     );
   };
 
-  radioChecked = (ent) => this.state.objReply == ent.entryIdx;
+  radioChecked = (ent) => this.state.objReply === ent.entryIdx;
 
   render() {
     if (this.props.contentInfo.objResultDetail === null) {

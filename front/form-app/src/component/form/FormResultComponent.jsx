@@ -37,6 +37,19 @@ class FormResultComponent extends Component {
     this.props.history.push("/forms");
   };
 
+  deleteForm = () => {
+    let deleted = window.confirm("설문을 삭제합니다.");
+    if (deleted) {
+      ApiService.deleteForm(this.state.formIdx)
+        .then((res) => {
+          this.props.history.push("/forms");
+        })
+        .catch((err) => {
+          console.log("deleteForm error!", err.response);
+        });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -45,6 +58,18 @@ class FormResultComponent extends Component {
         </Typography>
 
         <form style={formResultContainer}>
+          <Button
+            style={goToListStyle}
+            color="primary"
+            disabled={
+              this.state.formInfo.userId === window.sessionStorage.getItem("id")
+                ? false
+                : true
+            }
+            onClick={this.deleteForm}
+          >
+            삭제
+          </Button>
           <Button style={goToListStyle} color="primary" onClick={this.goToList}>
             목록으로
           </Button>
