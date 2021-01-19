@@ -22,50 +22,49 @@ class FormListComponent extends Component {
     this.loadFormList();
   }
 
-  loadFormList = () => {
-    ApiService.fetchForms()
-      .then((res) => {
-        this.setState({
-          forms: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log("loadFormList error!", err);
-      });
-  };
+    loadFormList = () => {
+        ApiService.formList()
+        .then(res => {
+            this.setState({
+                forms: res.data
+            })
+        })
+        .catch(err => {
+            console.log("loadFormList error!", err);
+        })
+    }
 
-  render() {
-    return (
-      <div>
-        <Typography variant="h4" style={style}>
-          Form List
-        </Typography>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>FormIdx</TableCell>
-              <TableCell>UserIdx</TableCell>
-              <TableCell>title</TableCell>
-              <TableCell>createdAt</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.forms.map((form) => (
-              <TableRow key={form.formIdx}>
-                <TableCell component="th" scope="form">
-                  {form.formIdx}
-                </TableCell>
-                <TableCell>{form.userIdx}</TableCell>
-                <TableCell>{form.title}</TableCell>
-                <TableCell>{form.createdAt}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    );
-  }
-}
+    readForm = (formIdx) => {
+        this.props.history.push(`/forms/${formIdx}`);
+    }
+
+    render(){
+        return(
+            <div>
+                <Typography variant="h4" style={style}>Form List</Typography>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>FormIdx</TableCell>
+                            <TableCell>UserId</TableCell>
+                            <TableCell>title</TableCell>
+                            <TableCell>createdAt</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.forms.map(form=>
+                            <TableRow onClick={() => this.readForm(form.formIdx)} key={form.formIdx}>
+                                <TableCell component="th" scope="form">{form.formIdx}</TableCell>
+                                <TableCell>{form.userId}</TableCell>
+                                <TableCell>{form.title}</TableCell>
+                                <TableCell>{form.createdAt}</TableCell>
+                            </TableRow>
+                            )}
+                    </TableBody>
+                </Table>
+            </div>
+        );
+    }
 
 const style = {
   display: "flex",

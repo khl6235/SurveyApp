@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8080";
 
 class ApiService {
-  fetchForms() {
+  formList() {
     return axios.get(`${BASE_URL}/forms`);
   }
 
@@ -11,6 +11,10 @@ class ApiService {
     return axios.post(`${BASE_URL}/user/login`, user);
   }
 
+  formInfo(formIdx) {
+    return axios.get(`${BASE_URL}/forms/${formIdx}`);
+  }
+  
   signup(user) {
     return axios.post(`${BASE_URL}/user/signup`, user);
   }

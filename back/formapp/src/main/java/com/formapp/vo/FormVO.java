@@ -5,7 +5,7 @@ import java.util.Date;
 public class FormVO {
 	
 	int formIdx;
-	int userIdx;
+	String userId;
 	String title;
 	Date createdAt;
 	
@@ -16,13 +16,13 @@ public class FormVO {
 	public void setFormIdx(int formIdx) {
 		this.formIdx = formIdx;
 	}
-
-	public int getUserIdx() {
-		return userIdx;
+	
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getTitle() {
@@ -39,6 +39,11 @@ public class FormVO {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	@Override
+	public String toString() {
+		return "FormVO [formIdx = "+formIdx+", userId = "+userId+", title = "+title+", createdAt = "+createdAt+"]";
 	}
 
 }

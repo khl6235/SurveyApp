@@ -6,5 +6,53 @@
 		SELECT * FROM form
 		ORDER BY formIdx ASC
 	</select>
+	
+	<select id="formDetail" resultType="com.formapp.vo.FormVO" parameterType="int">
+		SELECT * FROM form
+		WHERE formIdx=#{formIdx}
+	</select>
+	
+	<select id="contentList" resultType="com.formapp.vo.ContentVO" parameterType="int">
+		SELECT * FROM content
+		WHERE formIdx=#{formIdx}
+	</select>
+	
+	<select id="objEntryList" resultType="com.formapp.vo.EntryVO" parameterType="int">
+		SELECT * FROM obj_entry WHERE contentIdx=#{contentIdx}
+	</select>
+	
+	<select id="objResult" resultType="com.formapp.vo.ObjResultVO" parameterType="int">
+		SELECT R.userIdx, R.entryIdx
+		FROM obj_result R JOIN obj_entry E
+		WHERE R.entryIdx = E.entryIdx AND E.contentIdx=#{contentIdx}
+	</select>
+	
+	<select id="subjResult" resultType="com.formapp.vo.SubjResultVO" parameterType="int">
+		SELECT R.userIdx, R.contentIdx, R.answer
+		FROM subj_result R JOIN content C
+		WHERE R.contentIdx = C.contentIdx AND C.contentIdx=#{contentIdx}
+	</select>
+	
+	
+	
+	
+	<select id="distinctEntry" resultType="com.formapp.vo.EntryVO" parameterType="int">
+		 SELECT E.entryIdx, E.contentIdx, E.entry
+		 FROM obj_entry E JOIN (
+		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C 
+		 WHERE E.contentIdx = C.contentIdx
+		 GROUP BY E.contentIdx
+	</select>
+	
+	<select id="entryList" resultType="com.formapp.vo.EntryVO" parameterType="int">
+		 SELECT E.entryIdx, E.contentIdx, E.entry
+		 FROM obj_entry E JOIN (
+		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C
+		 WHERE E.contentIdx = C.contentIdx AND E.contentIdx=#{contentIdx}
+	</select>
+	
+	
+	
+	
 
 </mapper>
