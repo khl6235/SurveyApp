@@ -4,7 +4,7 @@
 
 	<select id="formList" resultType="com.formapp.vo.FormVO">
 		SELECT * FROM form
-		ORDER BY formIdx
+		ORDER BY formIdx ASC
 	</select>
 	
 	<select id="formDetail" resultType="com.formapp.vo.FormVO" parameterType="int">

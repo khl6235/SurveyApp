@@ -6,19 +6,24 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Icon from "@material-ui/core/Icon";
+import WebAsset from "@material-ui/icons/WebAsset";
 
 const NavBar = () => {
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+          <Icon edge="start" color="inherit">
+            <WebAsset />
+          </Icon>
           <Typography variant="h5" style={style}>
             Form Web
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton color="inherit">
+            <AccountCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
@@ -27,6 +32,7 @@ const NavBar = () => {
 
 const style = {
   flexGrow: 1,
+  marginLeft: "10px",
 };
 
 export default NavBar;

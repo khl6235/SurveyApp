@@ -14,6 +14,10 @@ class ApiService {
   formInfo(formIdx) {
     return axios.get(`${BASE_URL}/forms/${formIdx}`);
   }
+  
+  signup(user) {
+    return axios.post(`${BASE_URL}/user/signup`, user);
+  }
 }
 
 export default new ApiService();
