@@ -4,7 +4,6 @@ const BASE_URL = "http://localhost:8080";
 
 class ApiService {
   formList() {
-  fetchForms() {
     return axios.get(`${BASE_URL}/forms`);
   }
 
@@ -14,6 +13,10 @@ class ApiService {
 
   formInfo(formIdx) {
     return axios.get(`${BASE_URL}/forms/${formIdx}`);
+  }
+
+  contentReply(contentIdx, result) {
+    return axios.post(`${BASE_URL}/contents/${contentIdx}`, result);
   }
     
   signup(user) {

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formapp.mapper.FormMapper;
+import com.formapp.model.ContentInfo;
+import com.formapp.model.ResultForm;
+
 import com.formapp.vo.ContentVO;
 import com.formapp.vo.EntryVO;
 import com.formapp.vo.FormVO;
@@ -37,8 +40,6 @@ public class FormController {
 	
 	@GetMapping
 	public List<FormVO> formList(){
-		System.out.println("=== 설문 목록 ===");
-		System.out.println(formMapper.formList());
 		return formMapper.formList();
 	}
 	
@@ -80,7 +81,4 @@ public class FormController {
 		
 		return resultForm;
 	}
-
-
 }
-

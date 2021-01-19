@@ -32,27 +32,5 @@
 		FROM subj_result R JOIN content C
 		WHERE R.contentIdx = C.contentIdx AND C.contentIdx=#{contentIdx}
 	</select>
-	
-	
-	
-	
-	<select id="distinctEntry" resultType="com.formapp.vo.EntryVO" parameterType="int">
-		 SELECT E.entryIdx, E.contentIdx, E.entry
-		 FROM obj_entry E JOIN (
-		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C 
-		 WHERE E.contentIdx = C.contentIdx
-		 GROUP BY E.contentIdx
-	</select>
-	
-	<select id="entryList" resultType="com.formapp.vo.EntryVO" parameterType="int">
-		 SELECT E.entryIdx, E.contentIdx, E.entry
-		 FROM obj_entry E JOIN (
-		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C
-		 WHERE E.contentIdx = C.contentIdx AND E.contentIdx=#{contentIdx}
-	</select>
-	
-	
-	
-	
 
 </mapper>

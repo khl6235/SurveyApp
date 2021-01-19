@@ -12,15 +12,10 @@ import com.formapp.vo.SubjResultVO;
 
 @Mapper
 public interface FormMapper {
-	
 	List<FormVO> formList();
 	FormVO formDetail(int formIdx);
 	List<ContentVO> contentList(int formIdx);
 	List<EntryVO> objEntryList(int contentIdx);
 	List<ObjResultVO> objResult(int contentIdx);
-	List<SubjResultVO> subjResult(int contentIdx);
-	
-	List<EntryVO> distinctEntry(int formIdx);
-	List<EntryVO> entryList(int formIdx, int contentIdx);
-	
+	List<SubjResultVO> subjResult(int contentIdx);	
 }

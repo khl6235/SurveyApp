@@ -33,7 +33,7 @@ class ContentComponent extends Component {
   };
 
   objResult = (entry, result) => {
-    let resultDetail = [];
+    const resultDetail = [];
     entry.forEach((ent) => {
       resultDetail.push({ result: ent.entry, cnt: 0, entryIdx: ent.entryIdx });
     });
@@ -61,7 +61,7 @@ class ContentComponent extends Component {
   };
 
   subjResult = (result) => {
-    let resultDetail = [];
+    const resultDetail = [];
     result.forEach((res) => {
       if (res.answer != null) resultDetail.push({ result: res.answer });
     });
