@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,12 +9,12 @@ import Icon from "@material-ui/core/Icon";
 import WebAsset from "@material-ui/icons/WebAsset";
 import { Link, Router } from "react-router-dom";
 
-class NavBar extends Component{
-  constructor(props){
+class NavBar extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      profile: null
-    }
+    this.state = {
+      profile: null,
+    };
   }
 
   // componentDidMount(){
@@ -25,15 +25,15 @@ class NavBar extends Component{
   // }
 
   profileClick = (e) => {
-    if(this.state.profile === "Logout"){
+    if (this.state.profile === "Logout") {
       window.sessionStorage.clear();
       this.setState({
-        profile: null
-      }) 
+        profile: null,
+      });
     }
-  }
+  };
 
-  render(){
+  render() {
     return (
       <div>
         <AppBar position="static">
@@ -45,18 +45,15 @@ class NavBar extends Component{
               Form Web
             </Typography>
             <Button color="inherit">
-              <AccountCircle style={{marginRight:"5px"}}/>{this.state.profile}
+              <AccountCircle style={{ marginRight: "5px" }} />
+              {this.state.profile}
             </Button>
-            
           </Toolbar>
         </AppBar>
       </div>
     );
   }
 }
-
-  
-  
 
 const style = {
   flexGrow: 1,

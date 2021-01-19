@@ -47,10 +47,10 @@ class FormListComponent extends Component {
     this.props.history.push(`/forms/create`);
   };
 
-  logout = () =>{
+  logout = () => {
     window.sessionStorage.clear();
     this.props.history.push("/");
-  }
+  };
 
   render() {
     return (
@@ -58,43 +58,47 @@ class FormListComponent extends Component {
         <Typography variant="h4" style={style}>
           Form List
         </Typography>
-        <div style={{float: "right", marginRight:"85px"}}>
-          <Button
-          style={{marginRight:"20px"}}
-          onClick={this.createForm}
+        <div
+          style={{ float: "right", marginRight: "85px", marginBottom: "20px" }}
         >
-          설문 생성
-        </Button>
-        <Button
-        onClick={this.logout}
-        >로그아웃</Button>
+          <Button style={{ marginRight: "40px" }} onClick={this.createForm}>
+            설문 생성
+          </Button>
+          <Button onClick={this.logout}>로그아웃</Button>
         </div>
-        
 
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>FormIdx</TableCell>
-              <TableCell>UserId</TableCell>
-              <TableCell>title</TableCell>
-              <TableCell>createdAt</TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
+              <TableCell style={boldText}>WRITER</TableCell>
+              <TableCell style={boldText}>TITLE</TableCell>
+              <TableCell style={boldText}>CREATED AT</TableCell>
+              <TableCell style={boldText} align="center">
+                REPLY
+              </TableCell>
+              <TableCell style={boldText} align="center">
+                RESULT
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.state.forms.map((form) => (
               <TableRow key={form.formIdx}>
                 <TableCell component="th" scope="form">
-                  {form.formIdx}
+                  {form.userId}
                 </TableCell>
-                <TableCell>{form.userId}</TableCell>
                 <TableCell>{form.title}</TableCell>
                 <TableCell>{form.createdAt}</TableCell>
-                <TableCell onClick={() => this.replyForm(form.formIdx)}>
+                <TableCell
+                  onClick={() => this.replyForm(form.formIdx)}
+                  align="center"
+                >
                   <Button>응답하기</Button>
                 </TableCell>
-                <TableCell onClick={() => this.resultForm(form.formIdx)}>
+                <TableCell
+                  onClick={() => this.resultForm(form.formIdx)}
+                  align="center"
+                >
                   <Button>결과 조회</Button>
                 </TableCell>
               </TableRow>
@@ -109,6 +113,9 @@ const style = {
   display: "flex",
   justifyContent: "center",
   margin: "40px auto",
+};
+const boldText = {
+  fontWeight: "bold",
 };
 
 export default FormListComponent;
