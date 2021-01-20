@@ -33,26 +33,38 @@
 		WHERE R.contentIdx = C.contentIdx AND C.contentIdx=#{contentIdx}
 	</select>
 	
-	
-	
-	
-	<select id="distinctEntry" resultType="com.formapp.vo.EntryVO" parameterType="int">
-		 SELECT E.entryIdx, E.contentIdx, E.entry
-		 FROM obj_entry E JOIN (
-		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C 
-		 WHERE E.contentIdx = C.contentIdx
-		 GROUP BY E.contentIdx
+	<select id="findUser" parameterType="String" resultType="Integer">
+		SELECT userIdx FROM user WHERE id=#{id}
 	</select>
 	
-	<select id="entryList" resultType="com.formapp.vo.EntryVO" parameterType="int">
-		 SELECT E.entryIdx, E.contentIdx, E.entry
-		 FROM obj_entry E JOIN (
-		 	SELECT * FROM content WHERE formIdx=#{formIdx}) C
-		 WHERE E.contentIdx = C.contentIdx AND E.contentIdx=#{contentIdx}
-	</select>
+	<insert id="formCreate" parameterType="com.formapp.vo.FormVO">
+		INSERT INTO form(userId, title) VALUES(#{userId}, #{title})
+		<selectKey keyProperty="formIdx" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as formIdx
+		</selectKey>
+	</insert>
 	
-	
-	
-	
+	<insert id="formUserCreate" parameterType="int">
+		INSERT INTO user_form(userIdx, formIdx) values(#{userIdx}, #{formIdx})
+	</insert>
 
+	<insert id="contentCreate" parameterType="com.formapp.vo.ContentVO">
+		INSERT INTO content(formIdx, question, description) VALUES(#{formIdx}, #{question}, #{description})
+		<selectKey keyProperty="contentIdx" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID() as contentIdx
+		</selectKey>
+	</insert>
+	
+	<insert id="entryCreate" parameterType="com.formapp.vo.EntryVO">
+		INSERT INTO obj_entry(contentIdx, entry) VALUES(#{contentIdx}, #{entry})
+	</insert>
+	
+	<delete id="deleteUserForm" parameterType="int">
+		DELETE FROM user_form WHERE formIdx=#{formIdx}
+	</delete>
+	
+	<delete id="deleteForm" parameterType="int">
+		DELETE FROM form WHERE formIdx=#{formIdx}
+	</delete>
+	
 </mapper>

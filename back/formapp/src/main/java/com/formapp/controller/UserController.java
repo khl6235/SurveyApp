@@ -1,7 +1,7 @@
 package com.formapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,18 +18,22 @@ public class UserController {
 	UserMapper userMapper;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public UserVO login(@RequestBody UserVO user) {
-		System.out.println("=== 로그인 ===");
-		
+	public UserVO login(@RequestBody UserVO user) {		
 		UserVO matchUser = userMapper.login(user);
-		
 		if(matchUser == null) {
-			System.out.println("존재하지 않는 사용자입니다.");
 			return null;
 		}
 		else {
-			System.out.println(matchUser);
 			return matchUser;
 		}
+	}
+	
+	@PostMapping("/signup")
+	public boolean signup(@RequestBody UserVO user) {
+		if(userMapper.idCheck(user) != null)
+			return false;
+		else
+			userMapper.signUp(user);
+		return true;
 	}
 }
