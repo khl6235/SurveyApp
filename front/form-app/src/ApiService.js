@@ -30,6 +30,7 @@ class ApiService {
   signup(user) {
     return axios.post(`${BASE_URL}/user/signup`, user);
   }
+
 }
 
 export default new ApiService();
