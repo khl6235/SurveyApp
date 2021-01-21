@@ -44,6 +44,7 @@ class FormReplyComponent extends Component {
     const targetIdx = replyInfo.findIndex(
       (result) => result.contentIdx === reply.contentIdx
     );
+
     if (targetIdx !== -1) {
       replyInfo.splice(targetIdx, 1, reply);
     } else {
@@ -52,16 +53,13 @@ class FormReplyComponent extends Component {
   };
 
   submit = () => {
-    this.state.replyInfo.forEach((content) => {
-      content.userIdx = window.sessionStorage.getItem("userIdx");
-      ApiService.contentReply(content.contentIdx, content)
-        .then((res) => {
-          this.props.history.push("/forms");
-        })
-        .catch((err) => {
-          console.log("contentReply error!", err.response);
-        });
-    });
+    ApiService.formReply(this.state.formIdx, this.state.replyInfo)
+      .then((res) => {
+        this.props.history.push("/forms");
+      })
+      .catch((err) => {
+        console.log("formReply error!", err);
+      });
   };
 
   render() {

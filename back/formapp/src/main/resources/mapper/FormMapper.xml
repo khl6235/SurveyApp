@@ -37,6 +37,14 @@
 		SELECT userIdx FROM user WHERE id=#{id}
 	</select>
 	
+	<insert id="replySubj" parameterType="com.formapp.model.ReplyInfo">
+		INSERT INTO subj_result(userIdx, contentIdx, answer) VALUES(#{userIdx}, #{contentIdx}, #{subjReply})
+	</insert>
+	
+	<insert id="replyObj" parameterType="com.formapp.model.ReplyInfo">
+		INSERT INTO obj_result(userIdx, entryIdx) VALUES(#{userIdx}, #{objReply})
+	</insert>
+	
 	<insert id="formCreate" parameterType="com.formapp.vo.FormVO">
 		INSERT INTO form(userId, title) VALUES(#{userId}, #{title})
 		<selectKey keyProperty="formIdx" resultType="Integer" order="AFTER">
