@@ -25,9 +25,9 @@ class ContentComponent extends Component {
       objResultDetail,
       subjResultDetail,
     } = this.props.contentInfo;
-    if (subjResultDetail == null) {
+    if (subjResultDetail === null) {
       this.objResult(entryDetail, objResultDetail);
-    } else {
+    } else if (objResultDetail === null) {
       this.subjResult(subjResultDetail);
     }
   };
@@ -63,7 +63,8 @@ class ContentComponent extends Component {
   subjResult = (result) => {
     const resultDetail = [];
     result.forEach((res) => {
-      if (res.answer != null) resultDetail.push({ result: res.answer });
+      if (res.answer !== "" && res.answer !== null)
+        resultDetail.push({ result: res.answer });
     });
     this.setState({
       results: resultDetail,

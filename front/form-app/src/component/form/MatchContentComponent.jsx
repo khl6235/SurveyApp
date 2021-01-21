@@ -11,6 +11,7 @@ class MatchContentComponent extends Component {
       contentIdx: this.props.contentInfo.contentDetail.contentIdx,
       objReply: 0,
       subjReply: null,
+      userIdx: window.sessionStorage.getItem("userIdx"),
     };
   }
 

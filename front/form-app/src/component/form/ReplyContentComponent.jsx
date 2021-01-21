@@ -14,8 +14,12 @@ class ReplyContentComponent extends Component {
   }
 
   replyResult = (replyInfo) => {
-    this.state.reply = replyInfo;
-    this.props.func(this.state.reply);
+    this.setState(
+      {
+        reply: replyInfo,
+      },
+      () => this.props.func(this.state.reply)
+    );
   };
 
   render() {

@@ -7,33 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formapp.mapper.UserMapper;
+import com.formapp.service.UserService;
 import com.formapp.vo.UserVO;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
+	
 	@Autowired
-	UserMapper userMapper;
+	UserService userService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public UserVO login(@RequestBody UserVO user) {		
-		UserVO matchUser = userMapper.login(user);
-		if(matchUser == null) {
-			return null;
-		}
-		else {
-			return matchUser;
-		}
+		return userService.login(user);
 	}
 	
 	@PostMapping("/signup")
 	public boolean signup(@RequestBody UserVO user) {
-		if(userMapper.idCheck(user) != null)
-			return false;
-		else
-			userMapper.signUp(user);
-		return true;
+		return userService.signup(user);
 	}
 }

@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Icon from "@material-ui/core/Icon";
 import WebAsset from "@material-ui/icons/WebAsset";
-import { Link, Router } from "react-router-dom";
 
 class NavBar extends Component {
   constructor(props) {
