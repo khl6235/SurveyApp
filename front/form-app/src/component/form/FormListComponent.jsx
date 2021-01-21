@@ -109,11 +109,13 @@ class FormListComponent extends Component {
     );
   }
 }
+
 const style = {
   display: "flex",
   justifyContent: "center",
   margin: "40px auto",
 };
+
 const boldText = {
   fontWeight: "bold",
 };
