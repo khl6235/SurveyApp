@@ -362,4 +362,4 @@
 - 아이디, 비밀번호 찾기
 
 
-[Daily Reports]()
+[Daily Reports](https://github.com/khl6235/SurveyApp/wiki)
